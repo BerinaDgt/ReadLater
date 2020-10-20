@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using MVC.Models;
+using ReadLater.Entities;
 
 namespace MVC
 {
@@ -57,12 +58,14 @@ namespace MVC
             //app.UseFacebookAuthentication(
             //   appId: "",
             //   appSecret: "");
-
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+      
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "852617145302-qrbpel3oans6dcqtae7isq71dppk7a7j.apps.googleusercontent.com",
+                ClientSecret = "yrLw6DOjsNPBxrroC-5X1GKM",
+                Provider = new GoogleOAuth2AuthenticationProvider()
+            });
+            
         }
     }
 }

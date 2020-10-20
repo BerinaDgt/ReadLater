@@ -8,6 +8,7 @@ namespace ReadLater.Services
         Category CreateCategory(Category category);
         List<Category> GetCategories();
         Category GetCategory(int Id);
+        List<Category> GetCategoriesByUserId(string userId);
         Category GetCategory(string Name);
         void UpdateCategory(Category category);
         void DeleteCategory(Category category);

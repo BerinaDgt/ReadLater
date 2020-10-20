@@ -6,12 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using ReadLater.Data;
 using ReadLater.Entities;
 using ReadLater.Services;
 
 namespace MVC.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         ICategoryService _categoryService;
@@ -57,6 +59,8 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = User.Identity.GetUserId();
+                category.UserId = userId;
                 _categoryService.CreateCategory(category);
                 return RedirectToAction("Index");
             }
@@ -71,6 +75,7 @@ namespace MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            var userId = User.Identity.GetUserId();
             Category category = _categoryService.GetCategory((int)id);
             if (category == null)
             {

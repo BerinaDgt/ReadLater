@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.SqlServer.Server;
 using ReadLater.Entities;
 using ReadLater.Repository;
 
@@ -43,6 +44,13 @@ namespace ReadLater.Services
                                                     .FirstOrDefault();
         }
 
+        public List<Category> GetCategoriesByUserId( string userId)
+        {
+            return _unitOfWork.Repository<Category>().Query()
+                                                      .Filter(c => c.UserId == userId)
+                                                      .Get()
+                                                      .ToList();
+        }
         public Category GetCategory(string Name)
         {
             return _unitOfWork.Repository<Category>().Query()
