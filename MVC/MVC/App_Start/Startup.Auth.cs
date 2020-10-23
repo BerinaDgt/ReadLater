@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using MVC.Models;
 using ReadLater.Entities;
+using Microsoft.Owin.Security.OAuth;
 
 namespace MVC
 {
@@ -65,7 +66,19 @@ namespace MVC
                 ClientSecret = "yrLw6DOjsNPBxrroC-5X1GKM",
                 Provider = new GoogleOAuth2AuthenticationProvider()
             });
-            
+
+            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+            {
+                AllowInsecureHttp = true,
+                TokenEndpointPath = new PathString("/token"),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                Provider = new SimpleAuthorizationServerProvider()
+            };
+
+            // Token Generation
+            app.UseOAuthAuthorizationServer(OAuthServerOptions);
+            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+
         }
     }
 }

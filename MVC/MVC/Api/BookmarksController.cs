@@ -17,7 +17,6 @@ using ReadLater.Services;
 
 namespace MVC.Api
 {
-    [Authorize]
     public class BookmarksController : ApiController
     {
         private IBookmarkService _bookmarkService;
@@ -140,21 +139,6 @@ namespace MVC.Api
 
 
             return CreatedAtRoute("DefaultApi", new { id = bookmark.ID }, bookmark);
-        }
-
-        // DELETE: api/Bookmarks/5
-        [ResponseType(typeof(Bookmark))]
-        public IHttpActionResult DeleteBookmark(int id)
-        {
-            var bookmark = _context.Bookmarks
-                .Where(x => x.ID == id)
-                .SingleOrDefault();
-            if (bookmark == null)
-                return BadRequest("Bookmark not found!");
-           
-            _bookmarkService.DeleteCategory(bookmark);
-
-            return Ok();
         }
     }
 }

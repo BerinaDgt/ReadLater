@@ -10,6 +10,7 @@ namespace MVC.Api.Models
 {
     public class BookmarkViewModel
     {
+        public int Id { get; set; }
         public string URL { get; set; }
         public string ShortDescription { get; set; }
         public int? CategoryId { get; set; }
@@ -22,6 +23,7 @@ namespace MVC.Api.Models
             get {
                 return x => new BookmarkViewModel()
                 { 
+                    Id = x.ID,
                     URL = x.URL,
                     CategoryId = x.CategoryId,
                     CategoryName = x.Category.Name,
