@@ -13,7 +13,7 @@ namespace MVC
             Container container = new Container();
             //Configure Simple Injector
             ConfigureSimpleInjector(app, container);
-            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+            //app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
         }
     }
 }

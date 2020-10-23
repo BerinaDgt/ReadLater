@@ -67,17 +67,9 @@ namespace MVC
                 Provider = new GoogleOAuth2AuthenticationProvider()
             });
 
-            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
-            {
-                AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = new SimpleAuthorizationServerProvider()
-            };
-
-            // Token Generation
-            app.UseOAuthAuthorizationServer(OAuthServerOptions);
-            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+            //// Token Generation
+            //app.UseOAuthAuthorizationServer(OAuthServerOptions);
+            //app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
 
         }
     }

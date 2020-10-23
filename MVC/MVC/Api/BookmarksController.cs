@@ -29,24 +29,10 @@ namespace MVC.Api
             _context = context;
         }
 
-        [System.Web.Http.AcceptVerbs("GET", "POST")]
-        // GET: api/Bookmarks
-        [HttpGet]
-        [Route("GetBookmarks")]
-        //[Route("api/bookmarks/{category}", Name ="GetBookmarks")]
-        public async Task<IEnumerable<BookmarkViewModel>> GetBookmarks()
-        {
-            var userId = RequestContext.Principal.Identity.GetUserId();
-            var bookmarks = await _context.Bookmarks
-                .Select(BookmarkViewModel.Projection)
-                .ToListAsync();
-            return bookmarks;
-        }
-
         // GET: api/Bookmarks/5
         [HttpGet]
         [Route("GetBookmark/{id}")]
-        [ResponseType(typeof(Bookmark))]
+        [ResponseType(typeof(BookmarkViewModel))]
         public async Task<IHttpActionResult> GetBookmark(int id)
         {
             var bookmark = await _context.Bookmarks
@@ -57,6 +43,18 @@ namespace MVC.Api
                 return BadRequest("No Bookmark found!");
 
             return Ok(bookmark);
+        }
+
+        // GET: api/Bookmarks
+        [HttpGet]
+        [Route("GetAll")]
+        [ResponseType(typeof(Bookmark))]
+        public async Task<IEnumerable<BookmarkViewModel>> GetAll()
+        {
+            var bookmarks = await _context.Bookmarks
+                .Select(BookmarkViewModel.Projection)
+                .ToListAsync();
+            return bookmarks;
         }
 
         // PUT: api/Bookmarks/5
